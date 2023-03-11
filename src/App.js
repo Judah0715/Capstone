@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { browserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import {objectToURLString} from "./components/Helper"
 
 import Main from "./pages/Main";
-import Filter from "./pages/Filter;"
+import Filter from "./pages/Filter";
 
 const App = () => {
   useEffect(() => {
@@ -27,7 +27,7 @@ const App = () => {
     const paramStr = objectToURLString(urlParams);
     const apikey = process.env.REACT_APP_API_KEY;
 
-    let url = '${proxy}?api_key=${apikey}&page=${pageNum}${paramStr}';
+    let url = `${proxy}?api_key=${apikey}&page=${pageNum}${paramStr}`;
 
     let response = await fetch(url);
     let { results } = await response.json();
@@ -35,7 +35,7 @@ const App = () => {
     return results;
   };
 
-  const getMovieID =(arr) => {
+  const getMovieID = (arr) => {
     if (!arr || !arr.length) return;
     const randomNum = Math.floor(Math.random() * arr.length);
     const movieID = arr[randomNum].id;
@@ -63,14 +63,20 @@ const App = () => {
 
   const handleSuggBtn = async () => {
     setLoading(true);
+
     const randomPageNum = Math.floor(Math.random() * 10);
-    const movieArr = await getMovies(randomPageNum);
-    const movieID = getMovieID(movieArr);
+
+    const moviesArr = await getMovies(randomPageNum);
+
+    const movieID = getMovieID(moviesArr);
+
     getMovieData(movieID);
+
     setLoading(false);
   };
 
   const updateFilter = (data) => {
+
     setUrlParams({
       ...urlParams,
       ...data,
