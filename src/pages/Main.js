@@ -19,7 +19,7 @@ const Main = ({ movie, loading }) => {
     } = movie;
 
     const movieDate = release_date && release_date.split("-")[0];
-    const progressWidth = parseFloat(vore_average) * 10 + "%";
+    const progressWidth = parseFloat(Vote_average) * 10 + "%";
     const youtubeLink = `https://www.youtube.com/embed/${
       videos.results.length ? videos.results[0].key : ""
     }`;
@@ -89,7 +89,7 @@ const Main = ({ movie, loading }) => {
               </div>
               <div className='box-footer'>
                 <a
-                  href={homepage ? homepage : "https://www.imdb.com/"}
+                 // href={homepage ? homepage : "https://www.imdb.com/"}
                   target='_blanc'
                 >
                   <img className='img-fluid' src={imdblogo} alt='imdb logo' />
